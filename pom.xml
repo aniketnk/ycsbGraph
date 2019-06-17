@@ -97,6 +97,7 @@ LICENSE file.
     <!--<mapkeeper.version>1.0</mapkeeper.version>-->
     <mongodb.version>3.8.0</mongodb.version>
     <mongodb.async.version>2.0.1</mongodb.async.version>
+    <neo4j.version>3.5.6</neo4j.version>
     <openjpa.jdbc.version>2.1.1</openjpa.jdbc.version>
     <orientdb.version>2.2.37</orientdb.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -154,6 +155,7 @@ LICENSE file.
     <module>maprjsondb</module>
     <module>memcached</module>
     <module>mongodb</module>
+    <module>neo4j</module>
     <module>nosqldb</module>
     <module>orientdb</module>
     <module>postgrenosql</module>
@@ -173,11 +175,11 @@ LICENSE file.
   <build>
     <pluginManagement>
       <plugins>
-        <plugin>
+        <!-- <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
           <version>2.16</version>
-        </plugin>
+        </plugin> -->
       </plugins>
     </pluginManagement>
     <plugins>
@@ -210,7 +212,7 @@ LICENSE file.
           <target>1.8</target>
         </configuration>
       </plugin>
-      <plugin>
+      <!-- <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <executions>
@@ -225,7 +227,7 @@ LICENSE file.
             </configuration>
           </execution>
         </executions>
-      </plugin>
+      </plugin> -->
     </plugins>
   </build>
 </project>
