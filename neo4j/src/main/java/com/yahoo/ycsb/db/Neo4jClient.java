@@ -10,7 +10,7 @@ import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 import java.io.File;
-
+import java.io.*; 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
@@ -36,13 +36,13 @@ import com.yahoo.ycsb.Status;
 
 public class Neo4jClient extends DB {
 	private static final String URL_PROPERTY         = "neo4j.url";
-  private static final String URL_PROPERTY_DEFAULT = "bolt://localhost:7687";
+  	private static String URL_PROPERTY_DEFAULT = "";
 
-  private static final String USER_PROPERTY         = "neo4j.user";
-  private static final String USER_PROPERTY_DEFAULT = "neo4j";
+  	private static final String USER_PROPERTY         = "neo4j.user";
+  	private static String USER_PROPERTY_DEFAULT = "";
 
-  private static final String PASSWORD_PROPERTY         = "neo4j.password";
-  private static final String PASSWORD_PROPERTY_DEFAULT = "1234";
+  	private static final String PASSWORD_PROPERTY         = "neo4j.password";
+  	private static String PASSWORD_PROPERTY_DEFAULT = "";
 	/**
   * Initialize any state for this DB. Called once per DB instance; there is one DB instance per client thread.
   */
@@ -63,11 +63,23 @@ public class Neo4jClient extends DB {
 	public void init() throws DBException {
 		// initialize Neo4j driver
 		synchronized(Neo4jClient.class) {
+			try{
+				FileReader reader=new FileReader("./neo4j/src/main/java/com/yahoo/ycsb/db/db.properties");  
+				Properties externProps = new Properties(); 
+				externProps.load(reader);
+				URL_PROPERTY_DEFAULT = externProps.getProperty("URL_PROPERTY_DEFAULT");
+				USER_PROPERTY_DEFAULT = externProps.getProperty("USER_PROPERTY_DEFAULT");
+				PASSWORD_PROPERTY_DEFAULT = externProps.getProperty("PASSWORD_PROPERTY_DEFAULT");
+				
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+
 			final Properties props = getProperties();
 			String url = props.getProperty(URL_PROPERTY, URL_PROPERTY_DEFAULT);
 			String user = props.getProperty(USER_PROPERTY, USER_PROPERTY_DEFAULT);
 			String password = props.getProperty(PASSWORD_PROPERTY, PASSWORD_PROPERTY_DEFAULT);
-
 			if (driver == null) {
 				System.out.println("Making connection");
 
