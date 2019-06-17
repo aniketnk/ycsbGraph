@@ -33,9 +33,16 @@ import com.yahoo.ycsb.DB;
 import com.yahoo.ycsb.DBException;
 import com.yahoo.ycsb.StringByteIterator;
 import com.yahoo.ycsb.Status;
-import com.google.gson.Gson;
-public class Neo4jClient extends DB {
 
+public class Neo4jClient extends DB {
+	private static final String URL_PROPERTY         = "neo4j.url";
+  private static final String URL_PROPERTY_DEFAULT = "bolt://localhost:7687";
+
+  private static final String USER_PROPERTY         = "neo4j.user";
+  private static final String USER_PROPERTY_DEFAULT = "neo4j";
+
+  private static final String PASSWORD_PROPERTY         = "neo4j.password";
+  private static final String PASSWORD_PROPERTY_DEFAULT = "1234";
 	/**
   * Initialize any state for this DB. Called once per DB instance; there is one DB instance per client thread.
   */
@@ -53,15 +60,17 @@ public class Neo4jClient extends DB {
 		KNOWS
 	}
 
-	private static String DB_PATH = "/var/lib/neo4j/data/databases/graph.db";
-	File file = new File("./", DB_PATH);
 	public void init() throws DBException {
 		// initialize Neo4j driver
 		synchronized(Neo4jClient.class) {
+			String url = props.getProperty(URL_PROPERTY, URL_PROPERTY_DEFAULT);
+			String user = props.getProperty(USER_PROPERTY, USER_PROPERTY_DEFAULT);
+			String password = props.getProperty(PASSWORD_PROPERTY, PASSWORD_PROPERTY_DEFAULT);
+
 			if (driver == null) {
 				System.out.println("Making connection");
 
-				driver = GraphDatabase.driver("bolt://localhost:7687", AuthTokens.basic("neo4j", "12345"));
+				driver = GraphDatabase.driver(url, AuthTokens.basic(user, password));
 				System.out.println("Starting session");
 				session = driver.session();
 				session.run("CREATE INDEX ON :usertable(naturalId)");
