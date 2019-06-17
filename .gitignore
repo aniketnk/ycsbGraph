@@ -1,3 +1,6 @@
+# ignore the db.properties file 
+neo4j/src/main/java/com/yahoo/ycsb/db/db.properties
+
 # ignore compiled byte code
 target
 
@@ -22,5 +25,3 @@ output*
 
 # ignore standard Mac OS X files/dirs
 .DS_Store
-# ignore the db.properties file 
-/neo4j/src/main/java/com/yahoo/ycsb/db/db.properties
