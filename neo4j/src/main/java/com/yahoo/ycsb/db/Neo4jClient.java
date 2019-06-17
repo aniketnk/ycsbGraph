@@ -63,6 +63,7 @@ public class Neo4jClient extends DB {
 	public void init() throws DBException {
 		// initialize Neo4j driver
 		synchronized(Neo4jClient.class) {
+			final Properties props = getProperties();
 			String url = props.getProperty(URL_PROPERTY, URL_PROPERTY_DEFAULT);
 			String user = props.getProperty(USER_PROPERTY, USER_PROPERTY_DEFAULT);
 			String password = props.getProperty(PASSWORD_PROPERTY, PASSWORD_PROPERTY_DEFAULT);
