@@ -1,5 +1,5 @@
 # ignore the db.properties file 
-neo4j/src/main/java/com/yahoo/ycsb/db/db.properties
+/neo4j/src/main/java/com/yahoo/ycsb/db/db.properties
 
 # ignore compiled byte code
 target
