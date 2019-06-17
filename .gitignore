@@ -23,4 +23,4 @@ output*
 # ignore standard Mac OS X files/dirs
 .DS_Store
 # ignore the db.properties file 
-db.properties
+/neo4j/src/main/java/com/yahoo/ycsb/db/db.properties
