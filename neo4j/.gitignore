@@ -1,0 +1,2 @@
+# ignore the db.properties file 
+/src/main/java/com/yahoo/ycsb/db/db.properties
